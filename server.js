@@ -10,6 +10,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors")
 app.use(cors())
 
+
+
+
+
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -36,12 +40,12 @@ app.listen(port, () => {
 
 // adding GET route
 app.get("/weathertoday", (req, res) => {
-    res.send(projectData)
+    res.send(projectData);
 })
 
 // adding POST route
 app.post("/weathertoday", (req, res) => {
-    projectData=[];
+    projectData = [];
     const newData = {
         temperature: req.body.temperature,
         date: req.body.date,
