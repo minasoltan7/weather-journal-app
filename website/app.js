@@ -43,6 +43,7 @@ const getWeather = async (url) => {
             // to show the error message in the console
             throw `${data.message}`
         } else {
+
             console.log(data);
             return data
         }
@@ -70,21 +71,54 @@ const postFeeling = async (url = "", data = {}) => {
         console.log("error")
     }
 }
+
+
+// updating the UI by dending a get Request to the server and recieve the latest projectData
+
+const updateUI = async (url) => {
+    const res = await fetch(url);
+    try {
+        const data = await res.json()
+        console.log(data)
+        document.getElementById("date").innerHTML = data[0].date;
+        document.getElementById("temp").innerHTML = data[0].temperature;
+        document.getElementById("content").innerHTML = data[0].userResponse;
+        document.getElementById("country").innerHTML = data[0].country;
+        document.getElementById("city").innerHTML = data[0].name;
+        document.getElementById("weather").innerHTML = data[0].description;
+    } catch (error) {
+        console.log(error, "error")
+    }
+}
+
 // creating an event listener to the "Generate" button to exectute the Get request to the openWeatherMap 
 // when clicked.
-
 
 const generateButton = document.getElementById("generate");
 generateButton.addEventListener("click", () => {
     getWeather(basicURL)
         .then((data) => {
-            postFeeling("/weathertoday", {
-                temperature: data,
-                date: newDate,
-                userResponse: feelings
-            })
-            console.log(feelings)
+            // destructuring the main info we want from the data Object 
+            if (data) {
+                const {
+                    main: { temp },
+                    weather: [{ description }],
+                    sys: { country },
+                    name,
+                } = data
 
+                const dataToSend = {
+                    temperature: temp,
+                    date: newDate,
+                    userResponse: feelings,
+                    name: name,
+                    description: description,
+                    country: country,
+                }
+                postFeeling("http://127.0.0.1:3000/weathertoday", dataToSend)
+                console.log(dataToSend);
+                updateUI("http://127.0.0.1:3000/weathertoday");
+            }
         })
 
 })

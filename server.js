@@ -50,6 +50,9 @@ app.post("/weathertoday", (req, res) => {
         temperature: req.body.temperature,
         date: req.body.date,
         userResponse: req.body.userResponse,
+        name: req.body.name,
+        country: req.body.country,
+        description: req.body.description,
     }
 
     projectData.push(newData);
