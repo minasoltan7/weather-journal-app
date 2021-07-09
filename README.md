@@ -33,5 +33,6 @@ The tecnologes used in this project are:-
 ## Credits
 
 Credit goes to:-
-*Udacity professional front-end web development track
-*I used background from Marc Silik from Unsplash.com website
+
+- Udacity professional front-end web development track
+- I used background from Marc Silik from Unsplash.com website
