@@ -11,12 +11,12 @@ const updateZipcode = (event) => {
     zipCode = event.target.value;
     basicURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}&units=metric`
 }
+
 zipcodeInput.addEventListener("input", updateZipcode)
 
 // updating the feelinng textarea by adding "input" event listener to the "feeling"ID
 const updateFeelings = (event) => {
     feelingsTextarea.innerHTML = event.target.value
-    console.log(feelings.innerHTML);
 }
 feelingsTextarea.addEventListener("input", updateFeelings);
 
@@ -40,10 +40,14 @@ const getWeather = async (url) => {
                 error.innerHTML = "";
             }, 2000)
             // to show the error message in the console
-            throw `${data.message}`
+            throw ` <div id="date"></div>
+            <div id="temp"></div>
+            <div id="content"></div>
+            <div id="country"></div>
+            <div id="city"></div>
+            <div id="weather"></div>${data.message}`
         } else {
 
-            console.log(data);
             return data
         }
     } catch (error) {
@@ -65,7 +69,6 @@ const postFeeling = async (url = "", data = {}) => {
     })
     try {
         const newData = await response.json()
-        console.log(newData);
     } catch (error) {
         console.log("error")
     }
@@ -79,7 +82,6 @@ const updateUI = async (url) => {
     const res = await fetch(url);
     try {
         const data = await res.json()
-        console.log(data)
         document.getElementById("date").innerHTML = `Today: ${data[0].date}`;
         document.getElementById("temp").innerHTML = `Temperature: ${Math.ceil(data[0].temperature)}&degC `;
         document.getElementById("content").innerHTML = `Your Feeling: ${data[0].userResponse}`;
@@ -117,7 +119,6 @@ generateButton.addEventListener("click", () => {
                 }
 
                 postFeeling("http://127.0.0.1:3000/weathertoday", dataToSend)
-                console.log(dataToSend);
                 updateUI("http://127.0.0.1:3000/weathertoday");
             }
         })
