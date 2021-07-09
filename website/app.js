@@ -83,7 +83,7 @@ const updateUI = async (url) => {
         document.getElementById("date").innerHTML = `Today: ${data[0].date}`;
         document.getElementById("temp").innerHTML = `Temperature: ${Math.ceil(data[0].temperature)}&degC `;
         document.getElementById("content").innerHTML = `Your Feeling: ${data[0].userResponse}`;
-        document.getElementById("country").innerHTML = `City Code: ${data[0].country}`;
+        document.getElementById("country").innerHTML = `Country Code: ${data[0].country}`;
         document.getElementById("city").innerHTML = `City: ${data[0].name}`;
         document.getElementById("weather").innerHTML = `Weather Description: ${data[0].description} `;
     } catch (error) {
