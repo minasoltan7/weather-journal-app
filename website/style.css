@@ -37,6 +37,10 @@ body {
 #content {
 }
 
+textarea #myInput{
+  height: 5px;
+}
+
 .headline {
 }
 .title {

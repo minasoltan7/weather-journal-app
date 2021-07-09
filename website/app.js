@@ -2,22 +2,21 @@
 /* Global Variables */
 const apiKey = "0beafec112f102586c440eff7b680a94";
 let zipCode = "";
-let basicURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},&appid=${apiKey}&units=metric`;
-const feelingsTextarea = document.getElementById("feelings");
-let feelings = ""
+let basicURL = "";
+let feelingsTextarea = document.getElementById("feelings");
 const error = document.getElementById("error");
 // updating the basicURL by adding an input event listener to the "zip" ID
 const zipcodeInput = document.getElementById("zip");
 const updateZipcode = (event) => {
-    zipCode = `${event.target.value}`;
+    zipCode = event.target.value;
     basicURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}&units=metric`
 }
 zipcodeInput.addEventListener("input", updateZipcode)
 
 // updating the feelinng textarea by adding "input" event listener to the "feeling"ID
 const updateFeelings = (event) => {
-    let feelings = event.target.value
-    console.log(feelings);
+    feelingsTextarea.innerHTML = event.target.value
+    console.log(feelings.innerHTML);
 }
 feelingsTextarea.addEventListener("input", updateFeelings);
 
@@ -52,7 +51,7 @@ const getWeather = async (url) => {
     }
 }
 
-// Async function to mae POST request to send the temperature received from the OpenWeatherApi,the date and the userResponse received 
+// Async function to make POST request send the data received from the OpenWeatherApi,the date and the userResponse received 
 
 const postFeeling = async (url = "", data = {}) => {
     const response = await fetch(url, {
@@ -73,19 +72,20 @@ const postFeeling = async (url = "", data = {}) => {
 }
 
 
-// updating the UI by dending a get Request to the server and recieve the latest projectData
+// updating the UI by sending a get Request to the server and recieve the latest projectData
+// Then  changing the DOM elements
 
 const updateUI = async (url) => {
     const res = await fetch(url);
     try {
         const data = await res.json()
         console.log(data)
-        document.getElementById("date").innerHTML = data[0].date;
-        document.getElementById("temp").innerHTML = data[0].temperature;
-        document.getElementById("content").innerHTML = data[0].userResponse;
-        document.getElementById("country").innerHTML = data[0].country;
-        document.getElementById("city").innerHTML = data[0].name;
-        document.getElementById("weather").innerHTML = data[0].description;
+        document.getElementById("date").innerHTML = `Today: ${data[0].date}`;
+        document.getElementById("temp").innerHTML = `Temperature: ${Math.ceil(data[0].temperature)}&degC `;
+        document.getElementById("content").innerHTML = `Your Feeling: ${data[0].userResponse}`;
+        document.getElementById("country").innerHTML = `City Code: ${data[0].country}`;
+        document.getElementById("city").innerHTML = `City: ${data[0].name}`;
+        document.getElementById("weather").innerHTML = `Weather Description: ${data[0].description} `;
     } catch (error) {
         console.log(error, "error")
     }
@@ -110,11 +110,12 @@ generateButton.addEventListener("click", () => {
                 const dataToSend = {
                     temperature: temp,
                     date: newDate,
-                    userResponse: feelings,
+                    userResponse: feelingsTextarea.innerHTML,
                     name: name,
                     description: description,
                     country: country,
                 }
+
                 postFeeling("http://127.0.0.1:3000/weathertoday", dataToSend)
                 console.log(dataToSend);
                 updateUI("http://127.0.0.1:3000/weathertoday");
