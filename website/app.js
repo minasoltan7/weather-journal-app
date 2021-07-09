@@ -23,7 +23,7 @@ feelingsTextarea.addEventListener("input", updateFeelings);
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
 
 
@@ -82,12 +82,12 @@ const updateUI = async (url) => {
     const res = await fetch(url);
     try {
         const data = await res.json()
-        document.getElementById("date").innerHTML = `Today: ${data[0].date}`;
-        document.getElementById("temp").innerHTML = `Temperature: ${Math.ceil(data[0].temperature)}&degC `;
-        document.getElementById("content").innerHTML = `Your Feeling: ${data[0].userResponse}`;
-        document.getElementById("country").innerHTML = `Country Code: ${data[0].country}`;
-        document.getElementById("city").innerHTML = `City: ${data[0].name}`;
-        document.getElementById("weather").innerHTML = `Weather Description: ${data[0].description} `;
+        document.getElementById("date").innerHTML = `Today: ${data.date}`;
+        document.getElementById("temp").innerHTML = `Temperature: ${Math.ceil(data.temperature)}&degC `;
+        document.getElementById("content").innerHTML = `Your Feeling: ${data.userResponse}`;
+        document.getElementById("country").innerHTML = `Country Code: ${data.country}`;
+        document.getElementById("city").innerHTML = `City: ${data.name}`;
+        document.getElementById("weather").innerHTML = `Weather Description: ${data.description} `;
     } catch (error) {
         console.log(error, "error")
     }
