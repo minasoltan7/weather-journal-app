@@ -45,7 +45,6 @@ app.get("/weathertoday", (req, res) => {
 
 // adding POST route
 app.post("/weathertoday", (req, res) => {
-    projectData = [];
     const newData = {
         temperature: req.body.temperature,
         date: req.body.date,
