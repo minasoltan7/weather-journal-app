@@ -4,7 +4,7 @@
 
 This project create an asynchronous web app that uses "Open Weather Map" Web API and user data to dynamically update the UI.
 
-All you nedd is to add the Zip code of any US city and your feeling.Then the server will send back to you the following:-
+All you need is to add the Zip code of any US city and your feeling.Then the server will send back to you the following:-
 
 - Date
 - Temperature
