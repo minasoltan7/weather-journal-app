@@ -20,15 +20,12 @@ _Zipcode of Paris: *75000,fr*_
 
 ## Technologies and framework used
 
-The tecnologes used in this project are:-
+The dependencies used in this project are:-
 
 - Vanila Javascript
 - CSS
 - HTML
 - Express
-- Cors
-- Body-parser
-- Nodemon
 
 ## Credits
 
