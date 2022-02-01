@@ -17,6 +17,8 @@ All you need is to add the Zip code of any US city and your feeling.Then the ser
 
 _Example_
 _Zipcode of Paris: *75000,fr*_
+![weather](https://user-images.githubusercontent.com/74107578/152011178-b08494fa-91e6-439c-af8d-f7aa543208fe.png)
+
 
 ## Technologies and framework used
 
